@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form id="user-profile-form" method="post">
+    <p>Are you sure you want to delete your profile and all related data?</p>
+    {% csrf_token %}
+    <button id="user-profile-submit" for="user-profile_form">Confirm</button>
+</form>
+{% endblock %}
+
