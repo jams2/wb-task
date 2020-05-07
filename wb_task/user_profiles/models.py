@@ -22,15 +22,20 @@ class UserProfile(models.Model):
     address_city = models.ForeignKey(
         City, on_delete=models.PROTECT, verbose_name="City"
     )
-    phone_number = models.CharField(
-        max_length=32,
-        blank=True,
-        null=True,
-        validators=[phone_number_validator],
-        help_text="Valid UK phone number.",
-    )
     mobile_number = models.CharField(
         max_length=32,
         validators=[phone_number_validator],
         help_text="Valid UK mobile number.",
     )
+    phone_number = models.CharField(
+        max_length=32,
+        blank=True,
+        null=True,
+        validators=[phone_number_validator],
+        help_text="Valid UK phone number (optional).",
+    )
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+
+        return reverse("user_profiles:user-profile-update", args=[str(self.user.id)])
