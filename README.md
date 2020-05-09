@@ -1,12 +1,17 @@
 # wb-task
 
+The bulk of the app's logic (views, models) is in `wb_task/user_profiles/`.
+
+Code formatted with [Black](https://black.readthedocs.io/en/stable/)
+
+
 ## Installation
 
 ```
 $ git clone https://github.com/jams2/wb-task && cd wb-task
 ```
 
-Do app setup manually:
+You can perform the installation manually;
 
 ```
 $ python3 -m venv .venv
@@ -17,7 +22,7 @@ $ python manage.py loaddata fixtures/setup.json  # allauth SocialApp settings
 $ python manage.py loaddata fixtures/geo.json  # cities_light City records
 ```
 
-Or just `$ ./install`
+Or just `$ ./install`.
 
 
 ## Usage
