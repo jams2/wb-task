@@ -1,5 +1,6 @@
 import os
 
+from django.contrib import messages
 from wb_task.allauth_settings import *
 from wb_task.cities_light_settings import *
 
@@ -125,3 +126,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
+
+
+MESSAGE_TAGS = {
+    messages.DEBUG: "debug",
+    messages.INFO: "info",
+    messages.SUCCESS: "success",
+    messages.WARNING: "warning",
+    messages.ERROR: "error",
+}

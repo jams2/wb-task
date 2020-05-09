@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form id="user-profile-form" method="post">
-    {% csrf_token %}
-    <table class=".table">
-        {{ form }}
-    </table>
-    <button id="user-profile-submit" for="user-profile_form">Submit</button>
-</form>
+    <form id="user-profile-form" method="post">
+        {% csrf_token %}
+        <table class="table">
+            {{ form }}
+        </table>
+        <button class="btn btn-primary" id="user-profile-submit" for="user-profile_form">Submit</button>
+    </form>
 {% endblock %}

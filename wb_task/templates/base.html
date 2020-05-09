@@ -3,14 +3,20 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>title</title>
-        <meta name="author" content="name">
-        <meta name="description" content="description here">
-        <meta name="keywords" content="keywords,here">
+        <title>Github Login</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     </head>
     <body>
-        {% block content %}
-        {% endblock %}
+        {% if messages %}
+            <ul class="list-group">
+                {% for message in messages %}
+                    <div role="listitem" class="alert alert-{{ message.tags }} list-group-item">{{ message }}</div>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="container-fluid">
+            {% block content %}
+            {% endblock %}
+        </div>
     </body>
 </html>
