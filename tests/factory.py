@@ -9,12 +9,15 @@ class CountryFactory(DjangoModelFactory):
     class Meta:
         model = Country
 
+    name_ascii = "stub"
+
 
 class CityFactory(DjangoModelFactory):
     class Meta:
         model = City
 
     country = SubFactory(CountryFactory)
+    name_ascii = "stub"
 
 
 class UserFactory(DjangoModelFactory):
