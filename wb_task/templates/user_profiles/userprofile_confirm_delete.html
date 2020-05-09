@@ -5,6 +5,7 @@
     <p>Are you sure you want to delete your profile and all related data?</p>
     {% csrf_token %}
     <button class="btn btn-danger" id="user-profile-submit" for="user-profile_form">Confirm</button>
+    <a href="/" class="btn btn-outline-secondary">Cancel</a>
 </form>
 {% endblock %}
 

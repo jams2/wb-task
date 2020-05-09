@@ -6,6 +6,13 @@
         <table class="table">
             {{ form }}
         </table>
-        <button class="btn btn-primary" id="user-profile-submit" for="user-profile_form">Submit</button>
+        <button class="btn btn-primary" id="user-profile-submit" for="user-profile_form">
+            {% if object %}Update{% else %}Submit{% endif %}
+        </button>
+            {% if object %}
+                <a href="{% url 'user_profiles:user-profile-delete' object.pk %}" class="btn btn-outline-secondary">
+                    Delete Profile
+                </a>
+            {% endif %}
     </form>
 {% endblock %}
