@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse
 from django.views.generic.base import RedirectView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
@@ -24,8 +25,9 @@ class IndexView(LoginRequiredMixin, RedirectView):
         return reverse("user_profiles:user-profile-update", args=[self.request.user.id])
 
 
-class UserProfileCreate(LoginRequiredMixin, CreateView):
+class UserProfileCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     login_url = settings.LOGIN_URL
+    success_message = "Your profile was created."
     model = UserProfile
     fields = [
         "first_name",
@@ -44,8 +46,9 @@ class UserProfileCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class UserProfileUpdate(LoginRequiredMixin, UpdateView):
+class UserProfileUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = settings.LOGIN_URL
+    success_message = "Your profile was updated."
     model = UserProfile
     fields = [
         "first_name",
