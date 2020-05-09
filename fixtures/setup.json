@@ -1,0 +1,24 @@
+[
+    {
+        "model": "sites.site",
+        "pk": 2,
+        "fields": {
+            "domain": "wb_task",
+            "name": "wb_task"
+        }
+    },
+    {
+        "model": "socialaccount.socialapp",
+        "pk": 1,
+        "fields": {
+            "provider": "github",
+            "name": "github",
+            "client_id": "0bdaead9837ea52eea03",
+            "secret": "4faabacdab7a313954117c95be660e21aba70acf",
+            "key": "",
+            "sites": [
+                2
+            ]
+        }
+    },
+]
