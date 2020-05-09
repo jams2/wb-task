@@ -12,20 +12,26 @@ from django.conf import settings
 
 
 class IndexView(LoginRequiredMixin, RedirectView):
-    login_url = settings.LOGIN_URL
-
-    def dispatch(self, *args, **kwargs):
-        if not self.request.user.is_authenticated:
-            return redirect(self.login_url)
-        return super().dispatch(*args, **kwargs)
-
     def get_redirect_url(self, *args, **kwargs):
         if not hasattr(self.request.user, "userprofile"):
             return reverse("user_profiles:user-profile-create")
         return reverse("user_profiles:user-profile-update", args=[self.request.user.id])
 
 
-class UserProfileCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class ProfileOwnerMixin:
+    login_url = settings.LOGIN_URL
+
+    def dispatch(self, *args, **kwargs):
+        if not hasattr(self.request.user, "userprofile"):
+            return super().dispatch(*args, **kwargs)
+        elif "pk" in kwargs and kwargs["pk"] != self.request.user.userprofile.pk:
+            return redirect("user_profiles:user-profile-index")
+        return super().dispatch(*args, **kwargs)
+
+
+class UserProfileCreate(
+    ProfileOwnerMixin, LoginRequiredMixin, SuccessMessageMixin, CreateView
+):
     login_url = settings.LOGIN_URL
     success_message = "Your profile was created."
     model = UserProfile
@@ -46,7 +52,9 @@ class UserProfileCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-class UserProfileUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class UserProfileUpdate(
+    ProfileOwnerMixin, LoginRequiredMixin, SuccessMessageMixin, UpdateView
+):
     login_url = settings.LOGIN_URL
     success_message = "Your profile was updated."
     model = UserProfile
@@ -62,7 +70,7 @@ class UserProfileUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     ]
 
 
-class UserProfileDelete(LoginRequiredMixin, DeleteView):
+class UserProfileDelete(ProfileOwnerMixin, LoginRequiredMixin, DeleteView):
     login_url = settings.LOGIN_URL
     model = UserProfile
     success_url = "/"
